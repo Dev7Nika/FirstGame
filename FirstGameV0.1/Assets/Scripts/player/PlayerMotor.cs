@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
+    public playerAnimation animator;
     public Camera cam;
     private CharacterController controller;
     private Vector3 playerVelocity;
     public LayerMask mask;
     public float hitDistance = 3f;
     public float speed = 5f;
-    private bool IsGrounded;
+    public bool IsGrounded;
     private bool crouching;
     private bool sprinting;
+    private bool walking;
     private bool lerpCrouch;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
     public float crouchTimer;
     public bool canAttack;
+    public bool canJump;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        canJump = true;
+        sprinting = false;
     }
 
     // Update is called once per frame
@@ -47,6 +53,8 @@ public class PlayerMotor : MonoBehaviour
                 lerpCrouch = false;
                 crouchTimer = 0f;
             }
+
+            //animator.Idle();
         }
     }
     //recieve the inputs from InputManager.cs and apply them to the character controller
@@ -67,10 +75,13 @@ public class PlayerMotor : MonoBehaviour
 
     public void Jump()
     {
-        if (IsGrounded)
+        if (IsGrounded && canJump)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
+            animator.Jump();
+            canJump = false;
         }
+        Invoke("StopJump", 0.1f);
     }
 
     public void Crouch()
@@ -86,17 +97,47 @@ public class PlayerMotor : MonoBehaviour
         if (sprinting)
         {
             speed = 8;
+            animator.Run();
         }
-        else
+        else if (!sprinting && walking)
         {
-            speed = 5;
+            Walk();
         }
+    }
+
+    public void Walk()
+    {
+        Debug.Log("walking");
+        if (!sprinting)
+        {
+            speed = 5f;
+            animator.Walk();
+        }
+    }
+    public void Swalk()
+    {
+        sprinting = false;
+        animator.Idle();
     }
     public void Attack()
     {
         if (canAttack)
         {
             Debug.Log("Attacked!");
+        }
+    }
+
+    public void StopJump()
+    {
+        if (IsGrounded == false)
+        {
+            Invoke("StopJump", 0.01f);
+            Debug.Log("stopjump performed");
+        }
+        else
+        {
+            animator.sJump();
+            canJump = true;
         }
     }
 }

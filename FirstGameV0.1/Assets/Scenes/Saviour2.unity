@@ -3422,17 +3422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158b248465b7b6b40999c4f0bf2afb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockPrefab: {fileID: 128935683, guid: 8d931b3fb82717949a490ba2479926c4, type: 3}
-  treePrefab: {fileID: 7335176420224820531, guid: fe0c38f5305f2e14ca7e033eed8192aa, type: 3}
-  grassPrefab: {fileID: 5546342222124265899, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+  rockPrefab: {fileID: 7925908207704047568, guid: 335946c4528dd1e4cb26cd4893d8ac70, type: 3}
+  treePrefab: {fileID: 1973228233241776061, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
   terrain: {fileID: 419073610}
-  rockCount: 5000
-  treeCount: 3000
-  grassDensity: 0.1
-  minPatchSize: 10
-  maxPatchSize: 30
-  minGrassPerPatch: 1000
-  maxGrassPerPatch: 4000
+  rockCount: 500
+  treeCount: 300
 --- !u!114 &419073613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3639,16 +3633,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cba4ebe60ce9b47bcb2ab5ef020dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5585065957245631164}
   cam: {fileID: 963194227}
   mask:
     serializedVersion: 2
     m_Bits: 512
   hitDistance: 3
   speed: 5
+  IsGrounded: 0
   gravity: -9.8
   jumpHeight: 0.5
   crouchTimer: 0
   canAttack: 0
+  canJump: 0
 --- !u!114 &440522024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19054,6 +19051,7 @@ GameObject:
   - component: {fileID: 5585065957245631161}
   - component: {fileID: 5585065957245631163}
   - component: {fileID: 5585065957245631162}
+  - component: {fileID: 5585065957245631164}
   m_Layer: 8
   m_Name: BasicMotionsDummy
   m_TagString: Player
@@ -19469,7 +19467,7 @@ Animator:
   m_GameObject: {fileID: 5585065957238360257}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
-  m_Controller: {fileID: 9100000, guid: a8555c0cff30527479e32562cef9141f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 63aabd9f250f6104680c092e6e809900, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -19576,6 +19574,18 @@ MonoBehaviour:
   - m_Rig: {fileID: 1447434064}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &5585065957245631164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585065957238360257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9bd7398f61b884f81b6d0b5b1a9ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5652650124075233769
 GameObject:
   m_ObjectHideFlags: 0
@@ -20053,6 +20063,7 @@ GameObject:
   - component: {fileID: 440522029}
   - component: {fileID: 440522030}
   - component: {fileID: 440522031}
+  - component: {fileID: 7419913717743244034}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -20068,7 +20079,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406707137066360357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 414.3, y: 184, z: 559.6}
+  m_LocalPosition: {x: 95, y: 38.83, z: 91.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20077,6 +20088,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7419913717743244034
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406707137066360357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7433502581570538715
 GameObject:
   m_ObjectHideFlags: 0
